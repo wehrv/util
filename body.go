@@ -1,6 +1,7 @@
 package util
 
 import (
+	"encoding/json"
 	"io"
 	"log"
 	"mime"
@@ -33,7 +34,33 @@ func (body Body) New(w http.ResponseWriter, r *http.Request) *Body {
 	body.Maps = make(map[string]string)
 	body.Case = body.Path[0]
 	body.Body, body.Error = io.ReadAll(r.Body)
+	body.Unmarshal()
 	return &body
+}
+
+func (body *Body) Marshal() *Body {
+	if body.Error == nil {
+		body.Body, body.Error = json.Marshal(body.Maps)
+		if body.Error == nil {
+			body.Mime = "application/json; charset=utf-8"
+		}
+	}
+	return body
+}
+
+func (body *Body) Unmarshal() *Body {
+	var keys []string
+	var maps [][]string
+	body.Error = json.Unmarshal(body.Body, &keys)
+	if body.Error == nil {
+		for _, key := range keys {
+			body.Maps[key] = ""
+		}
+	} else {
+		body.Error = nil
+		json.Unmarshal(body.Body, &maps)
+	}
+	return body
 }
 
 func (body *Body) Err() {
