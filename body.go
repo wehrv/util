@@ -20,7 +20,7 @@ type Body struct {
 	W     http.ResponseWriter
 }
 
-func (body Body) New(r *http.Request) *Body {
+func (body Body) New(w http.ResponseWriter, r *http.Request) *Body {
 	body.R = r
 	body.W = w
 	body.Path = strings.Split(r.URL.Path[1:], "/")
