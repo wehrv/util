@@ -11,7 +11,7 @@ import (
 	"golang.org/x/text/language"
 )
 
-func IsEql(a, b, c, d string) string {
+func IsEqual(a, b, c, d string) string {
 	if a == b {
 		return c
 	}
