@@ -16,12 +16,16 @@ type Body struct {
 	Mime  string
 	Path  []string
 	Maps  map[string]string
+	R     *http.Request
+	W     http.ResponseWriter
 }
 
 func (body Body) New(r *http.Request) *Body {
+	body.R = r
+	body.W = w
 	body.Path = strings.Split(r.URL.Path[1:], "/")
-	body.Path[0] = isEql(body.Path[0], "", "app.html", body.Path[0])
-	body.Path[0] = isEql(body.Path[0], "favicon.ico", "app.png", body.Path[0])
+	body.Path[0] = util.IsEql(body.Path[0], "", "app.html", body.Path[0])
+	body.Path[0] = util.IsEql(body.Path[0], "favicon.ico", "app.png", body.Path[0])
 	body.Path[0] = "html/" + body.Path[0]
 	dots := strings.Split(body.Path[len(body.Path)-1], ".")
 	body.Mime = dots[len(dots)-1]
@@ -48,17 +52,17 @@ func (body *Body) File(file string) *Body {
 	return body
 }
 
-func (body *Body) Send(w http.ResponseWriter, r *http.Request) *Body {
+func (body *Body) Send() *Body {
 	if body.Error == nil {
-		w.Header().Set("Content-Type", body.Mime)
-		_, body.Error = w.Write(body.Body)
+		body.W.Header().Set("Content-Type", body.Mime)
+		_, body.Error = body.W.Write(body.Body)
 	}
 	return body
 }
 
-func (body *Body) End(w http.ResponseWriter, r *http.Request) *Body {
+func (body *Body) End() *Body {
 	if body.Error == nil {
-		body.File(strings.Join(body.Path, "/")).Send(w, r)
+		body.File(strings.Join(body.Path, "/")).Send()
 	}
 	body.Err()
 	return body

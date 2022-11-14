@@ -42,7 +42,7 @@ func ipErr(err error) bool {
 	return ppErr(err)
 }
 
-func isEql(a, b, c, d string) string {
+func IsEql(a, b, c, d string) string {
 	if a == b {
 		return c
 	}
