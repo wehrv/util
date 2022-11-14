@@ -24,9 +24,6 @@ func (body Body) New(w http.ResponseWriter, r *http.Request) *Body {
 	body.R = r
 	body.W = w
 	body.Path = strings.Split(r.URL.Path[1:], "/")
-	body.Path[0] = util.IsEql(body.Path[0], "", "app.html", body.Path[0])
-	body.Path[0] = util.IsEql(body.Path[0], "favicon.ico", "app.png", body.Path[0])
-	body.Path[0] = "html/" + body.Path[0]
 	dots := strings.Split(body.Path[len(body.Path)-1], ".")
 	body.Mime = dots[len(dots)-1]
 	if body.Mime == "" {
