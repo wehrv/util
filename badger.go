@@ -6,16 +6,16 @@ import (
 	"github.com/dgraph-io/badger/v3"
 )
 
+func (db DB) New(data string) *DB {
+	db.DB, db.Error = badger.Open(badger.DefaultOptions(data))
+	return &db
+}
+
 type DB struct {
 	DB    *badger.DB
 	Error error
 	Key   []byte
 	Val   []byte
-}
-
-func (db DB) New(data string) *DB {
-	db.DB, db.Error = badger.Open(badger.DefaultOptions(data))
-	return &db
 }
 
 func (db *DB) Pull(key []byte) *DB {

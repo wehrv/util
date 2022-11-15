@@ -5,6 +5,12 @@ import (
 	"os"
 )
 
+func (manifest Manifest) New(file string) *Manifest {
+	data, _ := os.ReadFile(file)
+	json.Unmarshal(data, &manifest)
+	return &manifest
+}
+
 type Manifest struct {
 	BackgroundColor           string
 	Categories                []string
@@ -69,10 +75,4 @@ type ManifestShareTargetParams struct {
 type ManifestShareTargetParamsFile struct {
 	Name   string
 	Accept []string
-}
-
-func (manifest Manifest) New(file string) Manifest {
-	data, _ := os.ReadFile(file)
-	json.Unmarshal(data, &manifest)
-	return manifest
 }
