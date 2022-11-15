@@ -80,6 +80,7 @@ func (body *Body) Send() *Body {
 	if body.Mime == "application/json" {
 		body.Mime += ";charset=utf-8"
 	}
+	log.Println(body.Path, body.Mime, len(body.Body))
 	if body.Error == nil {
 		body.W.Header().Set("Content-Type", body.Mime)
 		_, body.Error = body.W.Write(body.Body)
