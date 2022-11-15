@@ -77,6 +77,9 @@ func (body *Body) Send() *Body {
 		body.Mime = "text"
 	}
 	body.Mime = mime.TypeByExtension("." + body.Mime)
+	if body.Mime == "application/json" {
+		body.Mime += ";charset=utf-8"
+	}
 	if body.Error == nil {
 		body.W.Header().Set("Content-Type", body.Mime)
 		_, body.Error = body.W.Write(body.Body)
