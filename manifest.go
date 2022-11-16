@@ -12,67 +12,67 @@ func (manifest Manifest) New(file string) *Manifest {
 }
 
 type Manifest struct {
-	BackgroundColor           string
-	Categories                []string
-	Description               string
-	Display                   string
-	DisplayOverride           string
-	Icons                     []ManifestIcon
-	Id                        string
-	Name                      string
-	Orientation               string
-	PreferRelatedApplications bool
-	ProtocolHandlers          []ManifestProtocol
-	RelatedApplications       []ManifestRelated
-	Scope                     string
-	Screenshots               []ManifestScreenshots
-	ShareTarget               ManifestShareTarget
-	ShortName                 string
-	Shortcuts                 string
-	StartUrl                  string
-	ThemeColor                string
+	BackgroundColor           string                `json:"bakground_color"`
+	Categories                []string              `json:"categroies"`
+	Description               string                `json:"description"`
+	Display                   string                `json:"display"`
+	DisplayOverride           string                `json:"display_override"`
+	Icons                     []ManifestIcon        `json:"icons"`
+	Id                        string                `json:"id"`
+	Name                      string                `json:"name"`
+	Orientation               string                `json:"orientation"`
+	PreferRelatedApplications bool                  `json:"prefer_related_applications"`
+	ProtocolHandlers          []ManifestProtocol    `json:"protocol_handlers"`
+	RelatedApplications       []ManifestRelated     `json:"related_applications"`
+	Scope                     string                `json:"scope"`
+	Screenshots               []ManifestScreenshots `json:"screenshots"`
+	ShareTarget               ManifestShareTarget   `json:"share_target"`
+	ShortName                 string                `json:"short_name"`
+	Shortcuts                 string                `json:"shortcuts"`
+	StartUrl                  string                `json:"start_url"`
+	ThemeColor                string                `json:"theme_color"`
 }
 
 type ManifestIcon struct {
-	Src   string
-	Sizes string
-	Type  string
+	Src   string `json:"src"`
+	Sizes string `json:"sizes"`
+	Type  string `json:"type"`
 }
 
 type ManifestProtocol struct {
-	Protocol string
-	URL      string
+	Protocol string `json:"protocol"`
+	URL      string `json:"url"`
 }
 
 type ManifestRelated struct {
-	Id       string
-	Platform string
-	URL      string
+	Id       string `json:"id"`
+	Platform string `json:"platform"`
+	URL      string `json:"url"`
 }
 
 type ManifestScreenshots struct {
-	Src      string
-	Sizes    string
-	Type     string
-	Platform string
-	Label    string
+	Src      string `json:"url"`
+	Sizes    string `json:"sizes"`
+	Type     string `json:"type"`
+	Platform string `json:"platform"`
+	Label    string `json:"label"`
 }
 
 type ManifestShareTarget struct {
-	Action  string
-	Enctype string
-	Method  string
-	Params  ManifestShareTargetParams
+	Action  string                    `json:"action"`
+	Enctype string                    `json:"enctype"`
+	Method  string                    `json:"method"`
+	Params  ManifestShareTargetParams `json:"params"`
 }
 
 type ManifestShareTargetParams struct {
-	Title string
-	Text  string
-	URL   string
-	Files []ManifestShareTargetParamsFile
+	Title string                          `json:"type"`
+	Text  string                          `json:"text"`
+	URL   string                          `json:"url"`
+	Files []ManifestShareTargetParamsFile `json:"files"`
 }
 
 type ManifestShareTargetParamsFile struct {
-	Name   string
-	Accept []string
+	Name   string   `json:"name"`
+	Accept []string `json:"accept"`
 }
