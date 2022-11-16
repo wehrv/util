@@ -34,9 +34,10 @@ type Manifest struct {
 }
 
 type ManifestIcon struct {
-	Src   string `json:"src"`
-	Sizes string `json:"sizes"`
-	Type  string `json:"type"`
+	Purpose string `json:"purpose"`
+	Src     string `json:"src"`
+	Sizes   string `json:"sizes"`
+	Type    string `json:"type"`
 }
 
 type ManifestProtocol struct {
