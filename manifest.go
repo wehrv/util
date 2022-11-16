@@ -12,8 +12,8 @@ func (manifest Manifest) New(file string) *Manifest {
 }
 
 type Manifest struct {
-	BackgroundColor           string                `json:"bakground_color"`
-	Categories                []string              `json:"categroies"`
+	BackgroundColor           string                `json:"background_color"`
+	Categories                []string              `json:"categories"`
 	Description               string                `json:"description"`
 	Display                   string                `json:"display"`
 	DisplayOverride           string                `json:"display_override"`
