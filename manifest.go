@@ -3,10 +3,13 @@ package util
 import (
 	"encoding/json"
 	"os"
+
+	"github.com/davecgh/go-spew/spew"
 )
 
 func (manifest Manifest) New(file string) *Manifest {
 	data, _ := os.ReadFile(file)
+	spew.Dump(data)
 	json.Unmarshal(data, &manifest)
 	return &manifest
 }
