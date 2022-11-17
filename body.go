@@ -74,9 +74,7 @@ func (body *Body) Send() *Body {
 	if body.Error == nil {
 		dots := strings.Split(body.Path[len(body.Path)-1], ".")
 		body.Mime = dots[len(dots)-1]
-		if body.Mime == "" {
-			body.Mime = "text"
-		}
+		body.Mime = IsEqual(body.Mime, "", "text", body.Mime)
 		body.Mime = IsEqual(body.Mime, "webmanifest", "application/webmanifest+json; charset=utf-8", mime.TypeByExtension("."+body.Mime))
 		body.Mime = IsEqual(body.Mime, "application/json", "application/json; charset=utf-8", body.Mime)
 		body.Writer.Header().Set("Content-Type", body.Mime)
