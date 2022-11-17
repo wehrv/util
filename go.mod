@@ -3,6 +3,7 @@ module github.com/wehrv/util
 go 1.19
 
 require (
+	github.com/davecgh/go-spew v1.1.1
 	github.com/dgraph-io/badger/v3 v3.2103.4
 	golang.org/x/text v0.4.0
 )
