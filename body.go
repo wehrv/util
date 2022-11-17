@@ -77,10 +77,8 @@ func (body *Body) Send() *Body {
 		if body.Mime == "" {
 			body.Mime = "text"
 		}
-		body.Mime = mime.TypeByExtension("." + body.Mime)
-		if body.Mime == "application/json" {
-			body.Mime += "; charset=utf-8"
-		}
+		body.Mime = IsEqual(body.Mime, "webmanifest", "application/webmanifest+json; charset=utf-8", mime.TypeByExtension("."+body.Mime))
+		body.Mime = IsEqual(body.Mime, "application/json", "application/json; charset=utf-8", body.Mime)
 		body.Writer.Header().Set("Content-Type", body.Mime)
 		_, body.Error = body.Writer.Write(body.Body)
 	}
