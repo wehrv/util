@@ -14,14 +14,20 @@ func (manifest Manifest) New(file string) *Manifest {
 	return &manifest
 }
 
+// 09 Nov 2022 https://w3c.github.io/manifest/
+// 25 Oct 2022 https://www.w3.org/TR/manifest-app-info/
+// https://developer.mozilla.org/en-US/docs/Web/Manifest/
 type Manifest struct {
 	BackgroundColor           string                `json:"background_color"`
 	Categories                []string              `json:"categories"`
 	Description               string                `json:"description"`
+	Dir                       string                `json:"dir"`
 	Display                   string                `json:"display"`
 	DisplayOverride           string                `json:"display_override"`
+	IARCRatingId              string                `json:"iarc_rating_id"`
 	Icons                     []ManifestIcon        `json:"icons"`
 	Id                        string                `json:"id"`
+	Lang                      string                `json:"lang"`
 	Name                      string                `json:"name"`
 	Orientation               string                `json:"orientation"`
 	PreferRelatedApplications bool                  `json:"prefer_related_applications"`

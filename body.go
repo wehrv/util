@@ -90,9 +90,6 @@ func (body *Body) Send() *Body {
 }
 
 func (body *Body) End() *Body {
-	if body.Error == nil {
-		body.File(strings.Join(body.Path, "/")).Send()
-	}
-	body.Err()
+	body.File(strings.Join(body.Path, "/")).Send().Err()
 	return body
 }
