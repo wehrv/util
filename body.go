@@ -2,6 +2,7 @@ package util
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"log"
 	"mime"
@@ -77,6 +78,7 @@ func (body *Body) Send() *Body {
 		body.Mime = IsEqual(body.Mime, "", "text", body.Mime)
 		body.Mime = IsEqual(body.Mime, "webmanifest", "application/manifest+json; charset=utf-8", mime.TypeByExtension("."+body.Mime))
 		body.Mime = IsEqual(body.Mime, "application/json", "application/json; charset=utf-8", body.Mime)
+		fmt.Println(dots[len(dots)-1], body.Mime)
 		body.Writer.Header().Set("Content-Type", body.Mime)
 		_, body.Error = body.Writer.Write(body.Body)
 	}

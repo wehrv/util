@@ -36,15 +36,10 @@ func UnGZ(data []byte) ([]byte, error) {
 }
 
 func SnakeToCamel(str string) string {
-	//	fmt.Println(str)
 	fields := strings.Fields(strings.TrimSpace(strings.Replace(str, "_", " ", -1)))
-	//	fmt.Println(fields)
 	for field := range fields {
-		caser := cases.Title(language.AmericanEnglish)
-		fields[field] = caser.String(fields[field])
+		fields[field] = cases.Title(language.AmericanEnglish).String(fields[field])
 	}
-	//	fmt.Println(fields)
 	header := strings.Join(fields, "")
-	//	fmt.Println(header)
 	return header
 }
