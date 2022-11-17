@@ -2,7 +2,6 @@ package util
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"log"
 	"mime"
@@ -74,11 +73,16 @@ func (body *Body) File(file string) *Body {
 func (body *Body) Send() *Body {
 	if body.Error == nil {
 		dots := strings.Split(body.Path[len(body.Path)-1], ".")
-		body.Mime = dots[len(dots)-1]
-		body.Mime = IsEqual(body.Mime, "", "text", body.Mime)
-		body.Mime = IsEqual(body.Mime, "webmanifest", "application/manifest+json; charset=utf-8", mime.TypeByExtension("."+body.Mime))
-		body.Mime = IsEqual(body.Mime, "application/json", "application/json; charset=utf-8", body.Mime)
-		fmt.Println(dots[len(dots)-1], body.Mime)
+		switch dots[len(dots)-1] {
+		case "":
+			body.Mime = "text/plain; charset=utf-8"
+		case "application/json":
+			body.Mime = "application/json; charset=utf-8"
+		case "webmanifest":
+			body.Mime = "application/manifest+json; charset=utf-8"
+		default:
+			body.Mime = mime.TypeByExtension("." + dots[len(dots)-1])
+		}
 		body.Writer.Header().Set("Content-Type", body.Mime)
 		_, body.Error = body.Writer.Write(body.Body)
 	}

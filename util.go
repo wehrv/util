@@ -11,13 +11,6 @@ import (
 	"golang.org/x/text/language"
 )
 
-func IsEqual(a, b, c, d string) string {
-	if a == b {
-		return c
-	}
-	return d
-}
-
 func Fetch(url string) ([]byte, error) {
 	val, err := http.Get(url)
 	if err != nil {
