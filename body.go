@@ -13,7 +13,6 @@ import (
 type Body struct {
 	Body   []byte
 	Error  error
-	Case   string
 	Mime   string
 	Path   []string
 	Maps   map[string]string
@@ -26,7 +25,6 @@ func (body Body) New(w http.ResponseWriter, r *http.Request) *Body {
 	body.Writer = w
 	body.Path = strings.Split(r.URL.Path[1:], "/")
 	body.Maps = make(map[string]string)
-	body.Case = body.Path[0]
 	body.Body, body.Error = io.ReadAll(r.Body)
 	body.Unmarshal()
 	return &body
